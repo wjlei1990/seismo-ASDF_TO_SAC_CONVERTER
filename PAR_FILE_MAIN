@@ -1,0 +1,19 @@
+#=================================================================
+#if RUN_FLEXWIN, calculate the flexwin; 
+#if not, windows are already been generated. Read from window file
+#
+#
+#
+#=================================================================
+
+DEBUG                       = .false.
+WRITE_SAC                   = .TRUE.
+WRITE_ASCII                 = .TRUE.
+GENERATE_STATION_FILE       = .TRUE.
+
+#INPUT info
+INPUT_ASDF_FILE             = DATA/060994A_sem.bp
+
+#OUTPUT info
+OUTDIR                      = OUTPUT
+

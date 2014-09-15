@@ -1,0 +1,35 @@
+#This program is used to convert ASDF file into SAC file and ASCII file. 
+
+#DEVELOPER: Wenjie Lei
+#Email: lei@princeton.edu
+
+#-----------------------------
+Pre-request:
+1) SAC
+2) Adios-1.5.0
+
+#-----------------------------
+How to run examples:
+1) copy test PAR_FILE
+    cp PAR_FILE_MAIN.test PAR_FILE_MAIN
+2) complie the code
+    make clean ; make
+3) run the code
+    ./asdf_converter
+
+#-----------------------------
+How to run:
+1 There are one Par_file you might be intrested in:
+  a) PAR_FILE_MAIN: input file(obsd and synt) and out directory
+
+2. make clean;  make
+
+3. ./asdf_converter
+
+#-----------------------------
+Notes:
+1) the current version can only use one processor. Even though it needs to have mpi environment. The mpi environment is used for asdf API.
+
+#-----------------------------
+TODO:
+1) modify Makefile

@@ -1,0 +1,16 @@
+TEST
+asdf_converter
+*.win.dat
+*.swl
+*.bp
+*.o
+*.mod
+*.swo
+*.swp
+*.swn
+log
+*.ascii
+*.sac
+OUTPUT/*
+DATA/*
+*.bp
