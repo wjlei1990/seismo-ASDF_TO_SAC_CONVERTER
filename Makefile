@@ -1,7 +1,7 @@
 # Compiler
-FC=mpif90
+FC=ftn
 #FFLAGS=-g -warn
-FFLAGS=-g -check all -traceback
+FFLAGS=-g
 
 # Directories
 PWD    = $(shell pwd)
@@ -14,10 +14,10 @@ SRCDIR = $(PWD)/src
 #override ADIOS_INC:=` ${ADIOS_DIR}/bin/adios_config -c -f`
 #override ADIOS_FLIB:=`${ADIOS_DIR}/bin/adios_config -l -f`
 
-ASDF_LIBDIR=/home/lei/bin/asdf_util/lib
-ASDF_INCDIR=/home/lei/bin/asdf_util/include
+ASDF_LIBDIR=/ccs/home/jas11/asdf_util/lib
+ASDF_INCDIR=/ccs/home/jas11/asdf_util/include
 
-SACLIBDIR=$(SACHOME)/lib
+SACLIBDIR=/ccs/home/jas11/bin/sac-101.6a/build/src
 
 ADIOS_INC=$(shell adios_config -cf)
 ADIOS_FLIB=$(shell adios_config -lf)
@@ -38,7 +38,7 @@ $(MKOBJDIR):
 	mkdir -p $(MKOBJDIR)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.f90
-	$(FC) -c -o $@ $< $(FFLAGS) -module $(OBJDIR) -I$(ASDF_INCDIR)
+	$(FC) -c -o $@ $< $(FFLAGS) -J $(OBJDIR) -I$(ASDF_INCDIR)
 
 $(TARGET): $(OBJ)
 	$(FC) $(FFLAGS) -o $@ $(OBJ) -L$(SACLIBDIR) -L$(ASDF_LIBDIR) $(LIBS) $(ADIOS_FLIB)

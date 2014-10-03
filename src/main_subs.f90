@@ -52,7 +52,7 @@ subroutine read_main_parfile(rank, nproc, comm, ierr)
 
 2 format(a,a)
 3 format(a,l20)
-4 format(a,i)
+!4 format(a,i)
 
 end subroutine read_main_parfile
 
