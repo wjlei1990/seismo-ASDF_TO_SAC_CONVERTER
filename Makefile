@@ -1,7 +1,7 @@
 # Compiler
 FC=ftn
 #FFLAGS=-g -warn
-FFLAGS=-g
+FFLAGS=-g -Wall
 
 # Directories
 PWD    = $(shell pwd)
@@ -14,10 +14,10 @@ SRCDIR = $(PWD)/src
 #override ADIOS_INC:=` ${ADIOS_DIR}/bin/adios_config -c -f`
 #override ADIOS_FLIB:=`${ADIOS_DIR}/bin/adios_config -l -f`
 
-ASDF_LIBDIR=/ccs/home/jas11/asdf_util/lib
-ASDF_INCDIR=/ccs/home/jas11/asdf_util/include
+ASDF_LIBDIR=$(ASDFHOME)/lib
+ASDF_INCDIR=$(ASDFHOME)/include
 
-SACLIBDIR=/ccs/home/jas11/bin/sac-101.6a/build/src
+SACLIBDIR=$(SACHOME)/lib
 
 ADIOS_INC=$(shell adios_config -cf)
 ADIOS_FLIB=$(shell adios_config -lf)

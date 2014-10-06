@@ -13,23 +13,24 @@ program main
   type(asdf_event) :: my_asdf
 
   integer :: nproc, comm, rank
-  integer :: ierr, adios_err
+  integer :: ierr
 
   character(len=20), dimension(MAXDATA_PER_PROC) :: station, network
   character(len=20), dimension(MAXDATA_PER_PROC) :: component, receiver_id
   integer :: nrecords
 
-  integer :: i
-
-  call mpi_init(ierr)
-  call mpi_comm_dup(mpi_comm_world, comm, ierr)
-  call mpi_comm_rank(comm, rank, ierr)
-  call mpi_comm_size(comm, nproc, ierr)
+  call MPI_Init(ierr)
+  !call MPI_comm_dup(mpi_comm_world, comm, ierr)
+  comm = MPI_COMM_WORLD
+  call MPI_comm_rank(comm, rank, ierr)
+  call MPI_comm_size(comm, nproc, ierr)
 
   if(nproc.ne.1) then
     print *, "current version does not support parallel"
     stop
   endif
+
+  print *, "rank,comm:",rank, comm
 
   call read_main_parfile(rank, nproc, comm, ierr)
   

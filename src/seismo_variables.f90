@@ -5,7 +5,7 @@ module var_main
   logical :: WRITE_ASCII
   logical :: GENERATE_STATION_FILE
 
-  character(len=200) :: INPUT_ASDF_FILE, OUTDIR
+  character(len=256) :: INPUT_ASDF_FILE, OUTDIR
 
 end module var_main
 

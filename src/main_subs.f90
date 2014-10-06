@@ -29,26 +29,26 @@ subroutine read_main_parfile(rank, nproc, comm, ierr)
 
   !print *,"HERE"
 
-	read(IIN,3) dummy_string, DEBUG
-	print *, "DEBUG: ", DEBUG 
-	read(IIN,3) dummy_string, WRITE_SAC 
-	print *, "WRITE_SAC: ", WRITE_SAC 
-	read(IIN,3) dummy_string, WRITE_ASCII
-	print *, "WRITE_ASCII: ", WRITE_ASCII
-	read(IIN,3) dummy_string, GENERATE_STATION_FILE
+  read(IIN,3) dummy_string, DEBUG
+  print *, "DEBUG: ", DEBUG 
+  read(IIN,3) dummy_string, WRITE_SAC 
+  print *, "WRITE_SAC: ", WRITE_SAC 
+  read(IIN,3) dummy_string, WRITE_ASCII
+  print *, "WRITE_ASCII: ", WRITE_ASCII
+  read(IIN,3) dummy_string, GENERATE_STATION_FILE
   print *, "STATION_FILE:", GENERATE_STATION_FILE
 
   read(IIN, *)
   read(IIN, *)
 
-	read(IIN,2) dummy_string, INPUT_ASDF_FILE
-	print *, "INPUT_ASDF_FILE: ", trim(INPUT_ASDF_FILE)
+  read(IIN,2) dummy_string, INPUT_ASDF_FILE
+  print *, "INPUT_ASDF_FILE: ", trim(INPUT_ASDF_FILE)
 
   read(IIN, *)
   read(IIN, *)
-	
+  
   read(IIN,2) dummy_string, OUTDIR
-	print *, "OUTDIR: ", trim(OUTDIR)
+  print *, "OUTDIR: ", trim(OUTDIR)
 
 2 format(a,a)
 3 format(a,l20)
@@ -70,15 +70,15 @@ subroutine write_ascii_output(my_asdf, outdir, ierr)
   double precision :: b, dt
   integer :: npt
 
-  integer :: i, j
+  integer :: i
 
   character(len=300) :: fn, file_prefix
 
   call system('mkdir -p '//trim(outdir)//'')
-	!do a channel name modify here
-	do i=1,my_asdf%nrecords
-		my_asdf%component_array(i)(1:2)="LH"
-	enddo
+  !do a channel name modify here
+  do i=1,my_asdf%nrecords
+    my_asdf%component_array(i)(1:2)="LH"
+  enddo
 
   do i=1,my_asdf%nrecords
     file_prefix=trim(my_asdf%receiver_name_array(i))//"."//&
@@ -96,6 +96,8 @@ subroutine write_ascii_output(my_asdf, outdir, ierr)
     call dwascii(fn, data, npt, b, dt)
     deallocate(data)
   enddo
+
+  ierr=0
 
 end subroutine write_ascii_output
 
@@ -232,6 +234,8 @@ subroutine write_sac_output(my_asdf, outdir, ierr)
 
   enddo
 
+  ierr=0
+
   !print *,"========="
   !print *, "return"
   !print *,"========="
@@ -275,7 +279,7 @@ subroutine write_station_file(my_asdf, outdir, ierr)
   character(len=200) :: STATION_FN
 
   character(len=30), allocatable :: sta(:), ntw(:)
-  real, allocatable :: lat(:), lon(:), ele(:), dpt(:)
+  real(kind=8), allocatable :: lat(:), lon(:), ele(:), dpt(:)
   integer :: nrecords, nstations, sta_index
 
   integer :: i
@@ -319,6 +323,8 @@ subroutine write_station_file(my_asdf, outdir, ierr)
     write(IIN,5) sta(i), ntw(i), lat(i), lon(i), ele(i), dpt(i)
   enddo
   close(IIN)
+
+  ierr=0
 
 5 format(a10,a4,2f11.4, 2f10.1)
 
